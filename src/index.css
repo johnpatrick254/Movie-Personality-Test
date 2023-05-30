@@ -37,7 +37,7 @@ body {
 
 #root {
   width: 100%;
-  max-width: 1027px;
+  max-width: 1407x;
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
@@ -92,6 +92,17 @@ PREFERENCE START
   /* justify-content: space-between; */
   gap: 3rem;
 }
+.preference h1{
+  width: fit-content;
+  padding: 0.5em;
+  background: rgba(35, 33, 33, 0.31);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.8px);
+  -webkit-backdrop-filter: blur(4.8px);
+  border: 1px solid rgba(35, 33, 33, 0.3);
+
+  }
 
 .genres {
   display: flex;
