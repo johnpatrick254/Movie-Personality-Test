@@ -80,7 +80,7 @@ PREFERENCE START
 
 .preference {
   width: 95%;
-  height: 40%;
+  height: max-content;
   margin-top: 2rem;
   border-radius: 1rem;
   background-color: #080808c0;
@@ -89,8 +89,7 @@ PREFERENCE START
   font-size: 0.775rem;
   display: flex;
   flex-flow: column nowrap;
-  /* justify-content: space-between; */
-  gap: 3rem;
+  gap: 1rem;
 }
 .preference h1{
   width: fit-content;
