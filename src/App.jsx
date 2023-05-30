@@ -1,13 +1,12 @@
-import { Header } from './components/Header'
+import { Prefference } from './pages/Preference'
 
 function App() {
 
   return (
     <>
-    <div className='container'>
-     <Header/>
-
-    </div>
+  
+     <Prefference/>
+    
      
 
     </>
