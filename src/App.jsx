@@ -1,11 +1,11 @@
-import { Prefference } from './pages/Preference'
+import { Dashboard } from './pages/Dashboard'
 
 function App() {
 
   return (
     <>
   
-     <Prefference/>
+     <Dashboard/>
     
      
 
