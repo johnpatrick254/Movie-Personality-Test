@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
-import Login from './Login'
+import  { useEffect, useState } from 'react'
+import Login from '../components/Login'
 import '../styles/account.css';
-import SignUp from './Signup';
+import SignUp from '../components/Signup';
 
 const Account = () => {
+    const [currentPage,setCurrentPage] = useState('login')
 
     useEffect(()=>{
         document.addEventListener('mousemove',parallax);
@@ -16,12 +17,13 @@ const Account = () => {
         }
     },[])
     return (
-        <>
-            <div className='BG'></div>
-            <section className='account-section'>
-                <SignUp />
-            </section>
-        </>
+        <section className='account-section'>
+            {currentPage === 'login'?
+                <Login setCurrentPage={setCurrentPage} />
+            :
+                <SignUp setCurrentPage={setCurrentPage} />
+            }
+        </section>
     )
 }
 

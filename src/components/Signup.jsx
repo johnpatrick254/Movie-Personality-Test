@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { auth,db } from '../firebaseConfig';
-// import { createUserWithEmailAndPassword,updateProfile } from 'firebase/auth';
-// import { setDoc,doc } from 'firebase/firestore';
+/* eslint-disable react/prop-types */
+import  { useState } from 'react';
+import { auth,db } from '../firebaseConfig';
+import { createUserWithEmailAndPassword,updateProfile } from 'firebase/auth';
+import { setDoc,doc } from 'firebase/firestore';
+import { AlertData } from '../context/AlertContext';
 
-const SignUp = () => {
-    // const navigate = useNavigate()
+const SignUp = ({setCurrentPage}) => {
+    const { setAlertData } = AlertData()
     const [ formData, setFormData] = useState({
         email: '',
         password: '',
@@ -17,31 +18,25 @@ const SignUp = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        // if(email === '' || password === '' || passwordConf === '' || username === '' || initiateBalance === ''|| startDate === ''){
-        //     setAlertData({type:'warrning',showen:true,msg:'make sure to fill all the inputs'})
-        // }else if(password !== passwordConf ){
-        //     setAlertData({type:'warrning',showen:true,msg:'make sure to match the passwords'})
-        // } else {
-        //     createUserWithEmailAndPassword(auth,email,password)
-        //     .then((res)=>{
-        //         setAlertData({type:'success',showen:true,msg:'created account successfully'})
-        //         updateProfile(res.user,{displayName:username})
-        //         .then(()=>{
-        //             const Ref = doc(db,'portfolio',auth.currentUser.uid)
-        //             setDoc(Ref,{
-        //                 initialBalance:parseFloat(initiateBalance),
-        //                 currentBalance:parseFloat(initiateBalance),
-        //                 assets:[],
-        //                 growth:0,
-        //                 startDate: startDate
-        //             })
-        //             .then(()=>{
-        //                 navigate('/')
-        //             })
-        //         })
-        //     })
-        //     .catch((err) => setAlertData({type:'error',showen:true,msg:err.message}))
-        // }
+        if(email === '' || password === '' || passwordConf === '' || username === ''){
+            setAlertData({type:'warrning',showen:true,msg:'make sure to fill all the inputs'})
+        }else if(password !== passwordConf ){
+            setAlertData({type:'warrning',showen:true,msg:'make sure to match the passwords'})
+        } else {
+            createUserWithEmailAndPassword(auth,email,password)
+            .then((res)=>{
+                setAlertData({type:'success',showen:true,msg:'created account successfully'})
+                updateProfile(res.user,{displayName:username})
+                .then(()=>{
+                    const Ref = doc(db,'userData',auth.currentUser.uid)
+                    setDoc(Ref,{
+                        isAsked:false,
+                        answers:[]
+                    })
+                })
+            })
+            .catch((err) => setAlertData({type:'error',showen:true,msg:err.message}))
+        }
     }
 
     const handleChange = e => {
@@ -52,7 +47,7 @@ const SignUp = () => {
     }
     return (
         <form onSubmit={(e)=>handleSubmit(e)}>
-            <h2 className='logo'>
+            <h2 className='form-logo'>
                 <span className='first'>Reel</span>
                 <span className='second'>Radar</span>
             </h2>
@@ -72,7 +67,7 @@ const SignUp = () => {
                 autoComplete='off'
                 id='email'
                 name='email'
-                placeholder='name@example.com'
+                placeholder='example@email.com'
                 value={email}
                 onChange={handleChange}
             />
@@ -101,7 +96,7 @@ const SignUp = () => {
             </button>
             <p className='create-account'>
                 {/* already have an account? <Link to='/'><span> login</span></Link>  */}
-                already have an account?<span> login</span>
+                already have an account?<span onClick={()=>setCurrentPage('login')}> login</span>
             </p>
         </form>
     )
