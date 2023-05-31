@@ -1,0 +1,83 @@
+.BG {
+    position: fixed;
+    height: 120vh;
+    width: 120%;
+    top: -20vh;
+    left: -20%;
+    z-index: -1;
+    background-image: url('../../public/BG.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.account-section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.account-section form{
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    border-radius: 24px;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: fit-content;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+.account-section .logo {
+    width: 100%;
+    text-align: center;
+    font-size: 38px;
+}
+.account-section .first {
+    color: #fff;
+    
+}
+.account-section .second {
+    color: #DF1F24;
+}
+
+.account-section form label {
+    width: 100%;
+    margin-top: 30px;
+    color: #fff;
+}
+
+.account-section form input {
+    color: #fff;
+    width: 100%;
+    background-color: #B3B3B3;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.account-section form .Btn {
+    background-color: #DF1F24;
+    width: 160px;
+    height: 30px;
+    color: #fff;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-left: calc(100% - 160px);
+}
+.create-account {
+    color: #fff;
+    margin-top: 30px;
+    font-weight: 300;
+}
+
+.create-account span {
+    color: #DF1F24;
+    cursor: pointer;
+    font-weight: 600;
+}
+.create-account span:hover {
+    text-decoration: underline;
+}
