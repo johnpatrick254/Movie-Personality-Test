@@ -31,7 +31,7 @@ const SignUp = ({setCurrentPage}) => {
                     const Ref = doc(db,'userData',auth.currentUser.uid)
                     setDoc(Ref,{
                         isAsked:false,
-                        answers:[]
+                        answers:''
                     })
                 })
             })
@@ -95,7 +95,6 @@ const SignUp = ({setCurrentPage}) => {
                 create account
             </button>
             <p className='create-account'>
-                {/* already have an account? <Link to='/'><span> login</span></Link>  */}
                 already have an account?<span onClick={()=>setCurrentPage('login')}> login</span>
             </p>
         </form>

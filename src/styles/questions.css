@@ -1,0 +1,112 @@
+.questions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.questions .holder {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    height: 600px;
+    width: 550px;
+    overflow-x: hidden;
+}
+
+.questions .holder form {
+    height:  600px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: fit-content;
+    transition: 0.7s;
+}
+.questions .holder .question {
+    position: relative;
+    height:  600px;
+    width: 550px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 40px;
+}
+.questions .holder .question h2 {
+    margin-bottom: 60px;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.questions .holder .question p {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+.questions .holder .question p .bullet {
+    position: relative;
+    border: 2px solid #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.questions .holder .question p .bullet.choosen::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+.questions .holder .question p .check {
+    position: relative;
+    border: 2px solid #fff;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.questions .holder .question p .check.choosen::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    width: 20px;
+    height: 20px;
+}
+
+.questions .holder .question .next{
+    position: absolute;
+    bottom: 60px;
+    right: 60px;
+    background-color: #DF1F24;
+    width: 120px;
+    height: 40px;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.questions .holder .question .back {
+    position: absolute;
+    bottom: 60px;
+    left: 60px;
+    background-color: transparent;
+    width: 120px;
+    height: 40px;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 20px;
+    text-decoration: underline;
+}
