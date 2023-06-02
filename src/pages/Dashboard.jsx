@@ -93,6 +93,11 @@ export const Dashboard = (props) => {
                             if (i >= 5 && i <= 9) {
                                 return <MovieCard
                                     key={i}
+                                    onClick={(e) => {
+                                        setID(e.target.id)
+                                        setView(true);
+
+                                    }}
                                     title={movie.title}
                                     id={movie.id}
                                     release_date={movie.release_date}
@@ -113,6 +118,11 @@ export const Dashboard = (props) => {
                             if (i >= 10 && i <= 14) {
                                 return <MovieCard
                                     key={i}
+                                    onClick={(e) => {
+                                        setID(e.target.id)
+                                        setView(true);
+
+                                    }}
                                     id={movie.id}
                                     title={movie.title}
                                     release_date={movie.release_date}
