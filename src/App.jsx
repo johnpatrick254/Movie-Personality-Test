@@ -1,14 +1,12 @@
-import { Dashboard } from './pages/Dashboard'
+import { Dashboard } from './pages/Dashboard.jsx'
+// import { MoviePage } from './pages/MoviePage.jsx'
 
 function App() {
-
   return (
     <>
-  
-     <Dashboard/>
-    
-     
-
+      <Dashboard
+      genres="Horror"
+      />
     </>
   )
 }
