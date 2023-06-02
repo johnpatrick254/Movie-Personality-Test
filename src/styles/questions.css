@@ -9,13 +9,15 @@
 .questions .holder {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 20px;
-    height: 600px;
+    /* height: 600px; */
+    height: fit-content;
     width: 550px;
     overflow-x: hidden;
 }
 
 .questions .holder form {
-    height:  600px;
+    /* height:  600px; */
+    height: fit-content;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -24,7 +26,7 @@
 }
 .questions .holder .question {
     position: relative;
-    height:  600px;
+    height:  700px;
     width: 550px;
     padding: 60px;
     display: flex;
@@ -34,10 +36,22 @@
     gap: 40px;
 }
 .questions .holder .question h2 {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     color: #fff;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
+}
+.questions .holder .question textarea {
+    border: none;
+    outline: none;
+    width: 100%;
+    resize: vertical;
+    max-height: 260px;
+    padding: 20px;
+    font-size: 20px;
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
 }
 
 .questions .holder .question p {

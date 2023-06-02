@@ -10,6 +10,7 @@ function App() {
   const [isLoggedIn,setIsLoggedIn] = useState(false);
   const [isAsked,setIsAsked] = useState(false);
   const [answers,setAnswers] = useState([]);
+  console.log(answers)
 
   useEffect(()=>{
     onAuthStateChanged(auth,(res)=>{
@@ -40,7 +41,7 @@ function App() {
       :
         <>
           {isAsked?
-            <h2>home</h2>
+            <h2 className='h2White'>home</h2>
           :
             <Questions />
           }

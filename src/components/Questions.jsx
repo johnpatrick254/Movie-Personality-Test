@@ -7,105 +7,89 @@ import { auth, db } from '../firebaseConfig';
 const Questions = () => {
     const { setAlertData } = AlertData()
     const [currentQuestion,setCurrentQuestion] = useState(0);
-    const [answers,setAnswers] = useState(['',[]])
+    const [answers,setAnswers] = useState(['','','','','',''])
     const questions = [
         {
             type:'radio',
-            question:'do you like bananas?',
+            question:'Do you interact with alot of people?',
             options:['YES','NO']
         },
         {
-            type:"checkBox",
-            question:"why don't you like bananas?",
-            options:['resons 1','resons 2','resons 3','resons 4']
-        }
+            type:'radio',
+            question:'Do you use logic or emotions in your decisions?',
+            options:['Logic','Emotions']
+        },
+        {
+            type:'radio',
+            question:'Do you act carefully or impulsively?',
+            options:['carefully','Impulsively']
+        },
+        {
+            type:"input",
+            question:"What movie do you hate the most?",
+        },
+        {
+            type:"input",
+            question:"Imagine you have the power to enter the plot of any movie and interact with the characters. Which movie would you choose and what role would you play?",
+        },
+        {
+            type:"input",
+            question:"Share a memorable movie-watching experience you've had and what made it so special",
+        },
     ]
 
     function handleSubmit(e){
         e.preventDefault()
-        if(typeof answers[currentQuestion] === 'string'){
-            if(answers[currentQuestion] === ''){
-                setAlertData({type:'warrning',showen:true,msg:'make sure to answer the question'})
-            }else {
-                const Ref = doc(db,'userData',auth.currentUser.uid)
-                setDoc(Ref,{
-                    isAsked:true,
-                    answers:JSON.stringify(answers)
-                })
-                .then(()=>{
-                    setAlertData({type:'success',showen:true,msg:'data collected successfully'})
-                })
-                .catch(err => setAlertData({type:'error',showen:true,msg:err.message}))
-            }
+        if(answers[currentQuestion] === ''){
+            setAlertData({type:'warrning',showen:true,msg:'make sure to answer the question'})
         }else {
-            if(answers[currentQuestion].length < 1){
-                setAlertData({type:'warrning',showen:true,msg:'choose at least 1 chooice'})
-            }else {
-                const Ref = doc(db,'userData',auth.currentUser.uid)
-                setDoc(Ref,{
-                    isAsked:true,
-                    answers:JSON.stringify(answers)
-                }).then(()=>{
-                    setAlertData({type:'success',showen:true,msg:'data collected successfully'})
-                })
-                .catch(err => setAlertData({type:'error',showen:true,msg:err.message}))
-            }
+            const Ref = doc(db,'userData',auth.currentUser.uid)
+            setDoc(Ref,{
+                isAsked:true,
+                answers:JSON.stringify(answers)
+            })
+            .then(()=>{
+                setAlertData({type:'success',showen:true,msg:'data collected successfully'})
+            })
+            .catch(err => setAlertData({type:'error',showen:true,msg:err.message}))
         }
     }
 
 
-
-    function handleChoose(qi,oi,type){
-        if(type === 'radio'){
-            setAnswers(prev => {
-                let newArr = [...prev]
-                if(newArr[qi] === questions[qi].options[oi]){
-                    newArr[qi] = ''
-                }else {
-                    newArr[qi] = questions[qi].options[oi]
-                }
-                return newArr
-            })
-        }else {
-            setAnswers(prev => {
-                let newArr = [...prev]
-                if(newArr[qi].includes(questions[qi].options[oi])){
-                    newArr[qi] = newArr[qi].filter(e => e !== questions[qi].options[oi])
-                }else {
-                    newArr[qi].push(questions[qi].options[oi])
-                }
-                return newArr
-            })
-        }
+    function handleChange(e,i){
+        setAnswers(prev => {
+            let newArr = [...prev]
+            newArr[i] = e.target.value
+            return newArr
+        })
     }
+
+    function handleChoose(qi,oi){
+        setAnswers(prev => {
+            let newArr = [...prev]
+            if(newArr[qi] === questions[qi].options[oi]){
+                newArr[qi] = ''
+            }else {
+                newArr[qi] = questions[qi].options[oi]
+            }
+            return newArr
+        })
+    }
+
 
 
     function handleNext(e,currentQuestion,answers){
         e.preventDefault()
-        if(typeof answers[currentQuestion] === 'string'){
-            if(answers[currentQuestion] === ''){
-                setAlertData({type:'warrning',showen:true,msg:'make sure to answer the question'})
-            }else {
-                setCurrentQuestion(prev => {
-                    if(prev < questions.length - 1){
-                        return prev + 1
-                    } else {
-                        return prev
-                    }
-                });
-            }
+        if(answers[currentQuestion] === ''){
+            setAlertData({type:'warrning',showen:true,msg:'make sure to answer the question'})
         }else {
-            if(answers[currentQuestion].length < 1){
-                setAlertData({type:'warrning',showen:true,msg:'choose at least 1 chooice'})
-            }else {
-                setCurrentQuestion(prev => {
-                    if(prev < questions.length - 1){
-                        return prev + 1
-                    } else {
-                        return prev
-                    }
-                });
-            }
+            setCurrentQuestion(prev => {
+                if(prev < questions.length - 1){
+                    return prev + 1
+                } else {
+                    return prev
+                }
+            });
         }
     }
     function handleBack(e){
@@ -127,7 +111,7 @@ const Questions = () => {
                             return <div className='question' key={i}>
                                 <h2 className='text'>{e.question}</h2>
                                 {e.options.map((ele,index)=>{
-                                    return <p key={index} onClick={()=>handleChoose(i,index,e.type)}>
+                                    return <p key={index} onClick={()=>handleChoose(i,index)}>
                                         <span className={`bullet ${answers[i]=== ele && 'choosen'}`}></span>
                                         <span className='option'>{ele}</span>
                                     </p>
@@ -143,13 +127,12 @@ const Questions = () => {
                         }else {
                             return <div className='question' key={i} >
                                 <h2 className='text'>{e.question}</h2>
-                                {e.options.map((ele,index)=>{
-                                    return <p key={index} onClick={()=>handleChoose(i,index,e.type)}>
-                                            <span className={`check ${answers[i].includes(ele) && 'choosen'}`}></span>
-                                            <span className='option'>{ele}</span>
-                                        </p>
-                                })
-                                }
+                                <textarea 
+                                    name="" id=""
+                                    placeholder='your answer goes here'
+                                    value={answers[i]}
+                                    onChange={(event)=>handleChange(event,i)}
+                                    ></textarea>
                                 <button className='back' onClick={handleBack}>Back</button>
                                 {i === questions.length-1?
                                     <button className='next' onClick={(e)=>handleSubmit(e)}>Submit</button>
@@ -159,7 +142,6 @@ const Questions = () => {
                             </div>
                         }
                     })
-
                     }
                 </form>
             </article>
