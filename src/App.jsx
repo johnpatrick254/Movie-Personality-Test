@@ -5,12 +5,12 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from './firebaseConfig';
 import Questions from './components/Questions';
 import { doc, onSnapshot } from 'firebase/firestore';
+import {Dashboard} from './pages/Dashboard';
 
 function App() {
   const [isLoggedIn,setIsLoggedIn] = useState(false);
   const [isAsked,setIsAsked] = useState(false);
   const [answers,setAnswers] = useState([]);
-  console.log(answers)
 
   useEffect(()=>{
     onAuthStateChanged(auth,(res)=>{
@@ -41,7 +41,7 @@ function App() {
       :
         <>
           {isAsked?
-            <h2 className='h2White'>home</h2>
+            <Dashboard answers={answers} />
           :
             <Questions />
           }

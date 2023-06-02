@@ -223,3 +223,14 @@ input {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+h3,h1 {
+  color: #fff;
+}
