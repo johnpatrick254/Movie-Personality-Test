@@ -10,7 +10,7 @@ import {Dashboard} from './pages/Dashboard';
 function App() {
   const [isLoggedIn,setIsLoggedIn] = useState(false);
   const [isAsked,setIsAsked] = useState(false);
-  const [answers,setAnswers] = useState([]);
+  const [answers,setAnswers] = useState({});
 
   useEffect(()=>{
     onAuthStateChanged(auth,(res)=>{
@@ -28,7 +28,12 @@ function App() {
       onSnapshot(Ref,(res)=>{
         const { isAsked, answers } = res.data()
         setIsAsked(isAsked)
-        setAnswers(JSON.parse(answers))
+        const answersArr = JSON.parse(answers)
+        let answersObj = {}
+        for(let i=0; i<answersArr.length ; i++){
+          answersObj[`question${i+1}`] = answersArr[i]
+        }
+        setAnswers(answersObj)
       })
     }
   },[isLoggedIn])

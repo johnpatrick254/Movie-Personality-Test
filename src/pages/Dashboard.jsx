@@ -7,6 +7,8 @@ import '../styles/dashboard.css'
 
 
 export const  Dashboard =({answers})=>{
+
+    console.log(answers)
     
     return <>
     <Header/>
