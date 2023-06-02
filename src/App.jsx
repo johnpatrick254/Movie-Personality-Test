@@ -6,11 +6,12 @@ import { auth, db } from './firebaseConfig';
 import Questions from './components/Questions';
 import { doc, onSnapshot } from 'firebase/firestore';
 import {Dashboard} from './pages/Dashboard';
+import { genres } from './pages/genres';
 
 function App() {
   const [isLoggedIn,setIsLoggedIn] = useState(false);
   const [isAsked,setIsAsked] = useState(false);
-  const [answers,setAnswers] = useState({});
+  const [answers,setAnswers] = useState(null);
 
   useEffect(()=>{
     onAuthStateChanged(auth,(res)=>{
@@ -33,27 +34,33 @@ function App() {
         for(let i=0; i<answersArr.length ; i++){
           answersObj[`question${i+1}`] = answersArr[i]
         }
-        setAnswers(answersObj)
-      })
+       const take = Math.floor(Math.random() * 18)
+       setAnswers(genres[take].name)
+ 
+      })       
     }
   },[isLoggedIn])
 
   return (
+
     <main className='App'>
       <div className='BG'></div>
       {!isLoggedIn ?
         <Account />
       :
         <>
-          {isAsked?
-            <Dashboard answers={answers} />
+          {isAsked ?
+            <Dashboard genres={answers} />
           :
             <Questions />
           }
+
         </>
       }
       
     </main>
+    
+
   )
 }
 
