@@ -199,7 +199,8 @@ nav {
   background-repeat: no-repeat;
   background-position: top;
   background-clip: border-box;
-  padding: 2% 7% 0  ;
+  padding: 2% 7%;
+  overflow: hidden;
 
 }
 

@@ -41,7 +41,7 @@ export const MoviePage = (props) =>{
         {
           movie && <Movie
            data={movie}
-          
+           handleClick={props.handleClick}
           />}
     
    </>
