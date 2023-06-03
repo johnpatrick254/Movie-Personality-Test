@@ -12,13 +12,14 @@ export const Dashboard = (props) => {
     const [movies, setMovies] = useState()
     const [view, setView] = useState(false)
     const [id, setID] = useState(null)
-
+    
     const fetchTrailer = async (id) => {
         const apiKey = import.meta.env.VITE_API_KEY;
         let gen;
         for (const e of genres) {
-            if (e.name == id) {
+            if (`"${e.name}"` == id) {
                 gen = e.id;
+                console.log(`"${e.name}"`,id)
             }
         }
         const url = `https://api.themoviedb.org/3/discover/movie?api_key=79f884347c3b7cc3eb431b0e6a15f5d1&with_genres=${gen}`;
@@ -36,7 +37,7 @@ export const Dashboard = (props) => {
             .then((data) => {
 
                 setMovies(data);
-                console.log(data)
+                console.log(url)
 
             }
             )
