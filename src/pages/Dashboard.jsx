@@ -12,14 +12,15 @@ export const Dashboard = (props) => {
     const [movies, setMovies] = useState()
     const [view, setView] = useState(false)
     const [id, setID] = useState(null)
-    
+    const [loading, setIsLoading] = useState(false)
+
     const fetchTrailer = async (id) => {
         const apiKey = import.meta.env.VITE_API_KEY;
         let gen;
         for (const e of genres) {
             if (`"${e.name}"` == id) {
                 gen = e.id;
-                console.log(`"${e.name}"`,id)
+                console.log(`"${e.name}"`, id)
             }
         }
         const url = `https://api.themoviedb.org/3/discover/movie?api_key=79f884347c3b7cc3eb431b0e6a15f5d1&with_genres=${gen}`;
@@ -35,19 +36,23 @@ export const Dashboard = (props) => {
         fetch(url, options)
             .then((res) => res.json())
             .then((data) => {
-
+                
                 setMovies(data);
                 console.log(url)
+                setTimeout(() => {
+                    setIsLoading(false)
+                }, 200)
 
             }
             )
             .catch((e) => console.log(e));
 
-    }
-
-    useEffect(() => {
-        try {
-            fetchTrailer(props.genres)
+        }
+        
+        useEffect(() => {
+            try {
+                setIsLoading(true)
+                fetchTrailer(props.genres)
         } catch (e) {
             console.log(e)
         }
@@ -59,7 +64,7 @@ export const Dashboard = (props) => {
         {view ? <MoviePage handleClick={() => {
             setView(false);
             console.log(view)
-        }} id={id} /> : (movies && (<>
+        }} id={id} /> : ((movies && !loading) && (<>
             <Header />
             <div className="dashboard">
                 <h3>Picks for you</h3>
