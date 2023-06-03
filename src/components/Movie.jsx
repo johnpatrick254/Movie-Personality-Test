@@ -59,7 +59,7 @@ export const Movie = (props) => {
             }
         >
 
-            <p className="back-button" onClick={props.handleClick}>back</p>
+            <p className="back-button" onClick={props.handleClick}>Back</p>
             <div className="movie-content">
                 <div className="movie-name"
 
@@ -90,7 +90,7 @@ export const Movie = (props) => {
                             <span onClick={() => {
                                 setRed(!read)
                             }}>
-                                {!read ? " ...Read More" : " ...back"}</span>
+                                {!read ? " ...read more" : " ...read less"}</span>
                         </p>
                     </div>
 

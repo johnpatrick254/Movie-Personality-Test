@@ -119,7 +119,7 @@ nav {
   }
   
   .picks{
-    height: 26rem;
+    height: 22.5rem;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -134,12 +134,16 @@ nav {
     padding: 0.2em;
     min-height: fit-content;
     width: 18%;
+    min-width: 18%;
     display: grid;
+    gap: 0.5rem;
     grid-template-areas: 
     "img img img img "
     "date date date date "
     "date date date date "
     ;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(3,1fr);
     flex-flow: column nowrap;
     background: #050505;
     border-radius: 4px;
@@ -154,7 +158,7 @@ nav {
   .moviecard-poster{
     grid-area: img;
     width: 100%;
-    height:100%;
+    height:83%;
   }
   .moviecard-poster img{
     width: 100%;
@@ -162,10 +166,10 @@ nav {
   }
   .moviecard-metadata{
     grid-area: date;
+    align-self: flex-start;
+    place-self: flex-end;
     display: flex;
     flex-flow: column nowrap;
-    align-self: flex-end;
-    align-items: flex-start ;
     width: 100%;
     justify-content: space-between;
     padding: 0.2em 0.2em;
@@ -174,7 +178,10 @@ nav {
   .moviecard-metadata h1{
     font-size: 0.8rem; 
     grid-area: date;
+    word-wrap: break-word;
+    line-break: strict;
     }
+
   .moviecard-metadata_details{
     font-size: 0.7rem;
     display: flex;
@@ -186,9 +193,6 @@ nav {
   }
   
 
-
-
-  
 .movie-page{
   height: 100vh;
   width: 100%;
@@ -242,7 +246,8 @@ nav {
   width: 4rem;
   border-radius: 4px;
   text-align: center;
-  padding: 0.3em 0;
+  padding: 0.2em 0;
+  margin-bottom: 1rem;
 
 }
 .back-button:hover{
@@ -351,6 +356,46 @@ border-radius: 4px;
 
 
 @media only screen and (max-width: 912px) {
+ 
+  nav {
+    background-color: #080808ec;
+    padding: 20px 0;
+    justify-content: space-between;
+  }
+  nav h1 {
+    font-size: 1.5rem;
+    padding-left:1rem ;
+  }
+ 
+  .nav_text button {
+    height: fit-content;
+    width: fit-content;
+    padding: 0.2em;
+    font-size: 0.8758rem;
+    margin-right: 1rem;
+    border-radius: 4px;
+  }
+
+  .movie-page{
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .picks{
+    display: flex;
+    height: 100%;
+    flex-flow: row wrap;
+    /* background-color: #DF1F24; */
+    
+  }
+  .moviecard{
+    display: flex;
+    flex-flow: row wrap;
+    width: 45%;
+    height: 100%;
+    line-break: anywhere;
+    font-size: 0.5rem;
+    
+  }
  .movie-content{
   display: flex;
   flex-flow: column nowrap;
@@ -382,5 +427,32 @@ border-radius: 4px;
   padding: 0.3em 1em;
 
 }
+
+}
+@media only screen and (max-width:1302px) and (min-width:1279px){
+
+ 
+  .picks{
+    height: 22rem !important;
+  } 
+
+}
+@media only screen and (max-width:1278px) and (min-width:920px){
+
+ 
+  .picks{
+    height: 19rem;
+  }
+  
+
+}
+
+@media only screen and (max-width:1530px) and (min-width:1370px){
+
+ 
+  .picks{
+    height: 27rem !important;
+  }
+  
 
 }
